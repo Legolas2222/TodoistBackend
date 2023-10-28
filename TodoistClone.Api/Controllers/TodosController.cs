@@ -26,5 +26,17 @@ namespace TodoistClone.Api.Controllers {
 
             return Ok(response);
         }
+
+        [HttpPost("add")]
+        public IActionResult Add(TodoPostRequest request) {
+            var todoResult = _todoService.Add(
+                request.Title,
+                request.Description,
+                request.Done);
+
+            var response = new TodoPostResponse(todoResult.Id);
+
+            return Ok(response);
+        }
     }
 }
