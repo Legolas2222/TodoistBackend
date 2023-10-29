@@ -5,7 +5,7 @@ using TodoistClone.Contracts.TodoContract;
 namespace TodoistClone.Api.Controllers {
     [ApiController]
     [Route("todos")]
-    class TodosController : ControllerBase
+    public class TodosController : ControllerBase
     {
         private readonly ITodoService _todoService;
 
