@@ -1,4 +1,8 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR.Protocol;
 using TodoistClone.Application.Services.TodoService;
 using TodoistClone.Contracts.TodoContract;
 
@@ -15,8 +19,12 @@ namespace TodoistClone.Api.Controllers {
         }
 
         [HttpGet("getById")]
-        public IActionResult GetById(TodoGetByIdRequest request) {
-            var todoResult = _todoService.GetById(request.Id);
+        public IActionResult GetById([FromHeader] string id) {
+
+            if (id is null) {
+                return BadRequest();
+            }
+            var todoResult = _todoService.GetById(Guid.Parse(id));
 
             var response = new TodoGetResponse(
                 todoResult.Todo.Id,
@@ -27,6 +35,12 @@ namespace TodoistClone.Api.Controllers {
             return Ok(response);
         }
 
+        [HttpGet("test")]
+        public IActionResult Test([FromHeader]string testGuid) {
+            var result = JsonSerializer.Deserialize<string>(testGuid);
+            return Content(Guid.Parse(result.ToString()).ToString());
+        }
+        
         [HttpPost("add")]
         public IActionResult Add(TodoPostRequest request) {
             var todoResult = _todoService.Add(
