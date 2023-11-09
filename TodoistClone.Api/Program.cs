@@ -1,3 +1,4 @@
+using TodoistClone.Api.Filters;
 using TodoistClone.Api.Middleware;
 using TodoistClone.Application;
 using TodoistClone.Infrastructure;
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
-builder.Services.AddControllers();
+builder.Services.AddControllers(/*options => options.Filters.Add<ErrorHandlingFilterAttribute>()*/);
 
 /*
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -24,13 +25,14 @@ if (app.Environment.IsDevelopment())
 */
 var app = builder.Build();
 {
-//app.UseHttpsRedirection();
-app.UseMiddleware<ErrorHandlingMiddlware>();
+    //app.UseHttpsRedirection();
+    //app.UseMiddleware<ErrorHandlingMiddlware>();
+    app.UseExceptionHandler("/error");
+    app.UseHttpsRedirection();
+    //app.UseAuthorization();
 
-app.UseAuthorization();
+    app.MapControllers();
 
-app.MapControllers();
-
-app.Run();
+    app.Run();
 
 }

@@ -1,8 +1,5 @@
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR.Protocol;
 using TodoistClone.Application.Services.TodoService;
 using TodoistClone.Contracts.TodoContract;
 
