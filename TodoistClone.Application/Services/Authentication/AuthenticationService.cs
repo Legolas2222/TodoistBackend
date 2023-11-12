@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TodoistClone.Application.Common.Errors;
 using TodoistClone.Application.Common.Interfaces.Authentication;
 using TodoistClone.Application.Common.Interfaces.Persistence;
 using TodoistClone.Domain.Entities;
@@ -25,7 +26,7 @@ namespace TodoistClone.Application.Services.Authentication
             // Check that the user doesn't already exist
             if (_userRepository.GetUserByEmail(email) is not null)
             {
-                throw new Exception("User with given email already exists");
+                throw new DuplicateEmailException();
             }
 
 
@@ -36,7 +37,7 @@ namespace TodoistClone.Application.Services.Authentication
                 Password = password,
                 FirstName = firstName,
                 LastName = lastName
-            }; 
+            };
             _userRepository.Add(user);
 
             // Generate JWT token
