@@ -1,24 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TodoistClone.Application.Services.Authentication.Commands;
+using TodoistClone.Application.Services.Authentication.Queries;
 using TodoistClone.Contracts.Authentication;
-using TodoistClone.Application.Services.Authentication;
 
 namespace TodoistClone.Api.Controllers
 {
     [ApiController]
     [Route("auth")]
-    public class AuthenticationController: ControllerBase
+    public class AuthenticationController : ControllerBase
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly IAuthenticationCommandService _authenticationCommandService;
+        private readonly IAuthenticationQueryService _authenticationQueryService;
 
-        public AuthenticationController(IAuthenticationService authenticationService)
+        public AuthenticationController(
+            IAuthenticationCommandService authenticationCommandService,
+            IAuthenticationQueryService authenticationQueryService)
         {
-            _authenticationService = authenticationService;
+            _authenticationCommandService = authenticationCommandService;
+            _authenticationQueryService = authenticationQueryService;
         }
 
         [HttpPost("register")]
         public IActionResult Register(RegisterRequest request)
         {
-            var authResult = _authenticationService.Register(
+            var authResult = _authenticationCommandService.Register(
                 request.FirstName,
                 request.LastName,
                 request.Email,
@@ -37,7 +42,7 @@ namespace TodoistClone.Api.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginRequest request)
         {
-            var authResult = _authenticationService.Login(
+            var authResult = _authenticationQueryService.Login(
                 request.Email,
                 request.Password);
 
