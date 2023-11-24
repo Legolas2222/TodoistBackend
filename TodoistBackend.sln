@@ -13,6 +13,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoistClone.Domain", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoistClone.Infrastructure", "src\TodoistClone.Infrastructure\TodoistClone.Infrastructure.csproj", "{212FF3A5-5D93-4A50-8E32-5874A87260D3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{10F45195-11C1-44F2-9759-C57D1676B45A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoistClone.Api.Tests", "tests\TodoistClone.Api.Tests\TodoistClone.Api.Tests.csproj", "{C903E605-3AB7-4052-BE40-BA8362F11D3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoistClone.Application.Tests", "tests\TodoistClone.Application.Tests\TodoistClone.Application.Tests.csproj", "{E850CA2A-3366-418E-ACCD-06EA2B8C94F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoistClone.Domain.Tests", "tests\TodoistClone.Domain.Tests\TodoistClone.Domain.Tests.csproj", "{C04BFE78-7721-48DD-B85B-768EDC83DAE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoistClone.Infrastructure.Tests", "tests\TodoistClone.Infrastructure.Tests\TodoistClone.Infrastructure.Tests.csproj", "{C84AE84E-9AFF-4CC3-8803-3C3F66B745C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +52,27 @@ Global
 		{212FF3A5-5D93-4A50-8E32-5874A87260D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{212FF3A5-5D93-4A50-8E32-5874A87260D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{212FF3A5-5D93-4A50-8E32-5874A87260D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C903E605-3AB7-4052-BE40-BA8362F11D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C903E605-3AB7-4052-BE40-BA8362F11D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C903E605-3AB7-4052-BE40-BA8362F11D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C903E605-3AB7-4052-BE40-BA8362F11D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E850CA2A-3366-418E-ACCD-06EA2B8C94F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E850CA2A-3366-418E-ACCD-06EA2B8C94F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E850CA2A-3366-418E-ACCD-06EA2B8C94F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E850CA2A-3366-418E-ACCD-06EA2B8C94F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C04BFE78-7721-48DD-B85B-768EDC83DAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C04BFE78-7721-48DD-B85B-768EDC83DAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C04BFE78-7721-48DD-B85B-768EDC83DAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C04BFE78-7721-48DD-B85B-768EDC83DAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C84AE84E-9AFF-4CC3-8803-3C3F66B745C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C84AE84E-9AFF-4CC3-8803-3C3F66B745C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C84AE84E-9AFF-4CC3-8803-3C3F66B745C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C84AE84E-9AFF-4CC3-8803-3C3F66B745C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C903E605-3AB7-4052-BE40-BA8362F11D3D} = {10F45195-11C1-44F2-9759-C57D1676B45A}
+		{E850CA2A-3366-418E-ACCD-06EA2B8C94F4} = {10F45195-11C1-44F2-9759-C57D1676B45A}
+		{C04BFE78-7721-48DD-B85B-768EDC83DAE4} = {10F45195-11C1-44F2-9759-C57D1676B45A}
+		{C84AE84E-9AFF-4CC3-8803-3C3F66B745C6} = {10F45195-11C1-44F2-9759-C57D1676B45A}
 	EndGlobalSection
 EndGlobal
