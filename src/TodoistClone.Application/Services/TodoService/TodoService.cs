@@ -2,7 +2,8 @@
 using TodoistClone.Application.Common.Interfaces.Persistence;
 using TodoistClone.Domain.Entities;
 
-namespace TodoistClone.Application.Services.TodoService {
+namespace TodoistClone.Application.Services.TodoService
+{
     class TodoService : ITodoService
     {
         private readonly ITodoRepository _todoRepository;
@@ -12,9 +13,11 @@ namespace TodoistClone.Application.Services.TodoService {
             _todoRepository = todoRepository;
         }
 
-        public TodoPostResult Add(string title, string description, bool done) {
+        public TodoPostResult Add(string title, string description, bool done)
+        {
             // Create todo and generate id from arguments
-            var todo = new Todo {
+            var todo = new TodoItem
+            {
                 Title = title,
                 Description = description,
                 Done = done,
@@ -29,7 +32,7 @@ namespace TodoistClone.Application.Services.TodoService {
 
         public TodoGetResult GetById(Guid id)
         {
-            if (_todoRepository.GetTodoById(id) is not Todo todo)
+            if (_todoRepository.GetTodoById(id) is not TodoItem todo)
             {
                 throw new Exception("Todo with given id does not exist");
             }
