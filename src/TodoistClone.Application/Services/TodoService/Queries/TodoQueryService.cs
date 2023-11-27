@@ -14,6 +14,7 @@ public class TodoQueryService : ITodoQueryService
 
     public async Task<IEnumerable<TodoItemDTO>> GetAll()
     {
+        //! Validation
         var result = await _todoItemRepository.GetAll(); 
 
         var respone = new List<TodoItemDTO>();
@@ -29,6 +30,7 @@ public class TodoQueryService : ITodoQueryService
 
     public async Task<TodoItemDTO> GetById(Guid id)
     {
+        //! Validation
         var result = await _todoItemRepository.GetById(id);
         var respone = new TodoItemDTO(
             result.Id,
