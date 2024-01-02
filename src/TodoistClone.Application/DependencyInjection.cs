@@ -1,7 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using TodoistClone.Application.Common.Interfaces.Persistence;
 using TodoistClone.Application.Services.Authentication.Commands;
 using TodoistClone.Application.Services.Authentication.Queries;
-using TodoistClone.Application.Services.TodoService;
+using TodoistClone.Application.Services.TodoService.Commands;
+using TodoistClone.Application.Services.TodoService.Commands.DTOs;
+using TodoistClone.Application.Services.TodoService.Queries;
+using TodoistClone.Domain.Entities;
 
 namespace TodoistClone.Application;
 
@@ -12,7 +16,8 @@ public static class DependencyInjection
     {
         services.AddScoped<IAuthenticationCommandService, AuthenticationCommandService>();
         services.AddScoped<IAuthenticationQueryService, AuthenticationQueryService>();
-        services.AddScoped<ITodoService, TodoService>();
+        services.AddScoped<ITodoCommandService, TodoCommandService>();
+        services.AddScoped<ITodoQueryService, TodoQueryService>();
         return services;
     }
 

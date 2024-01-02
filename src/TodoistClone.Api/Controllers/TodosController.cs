@@ -1,6 +1,8 @@
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-using TodoistClone.Application.Services.TodoService;
+using TodoistClone.Application.Services.TodoService.Commands;
+using TodoistClone.Application.Services.TodoService.Commands.DTOs;
+using TodoistClone.Application.Services.TodoService.Commands.DTOs.Delete;
+using TodoistClone.Application.Services.TodoService.Queries;
 using TodoistClone.Contracts.TodoContract;
 
 namespace TodoistClone.Api.Controllers
@@ -9,42 +11,58 @@ namespace TodoistClone.Api.Controllers
     [Route("todos")]
     public class TodosController : ControllerBase
     {
-        private readonly ITodoService _todoService;
+        private readonly ITodoQueryService _todoQueryService;
+        private readonly ITodoCommandService _todoCommandService;
 
-        public TodosController(ITodoService todoService)
+        public TodosController( ITodoQueryService todoQueryService, ITodoCommandService todoCommandService)
         {
-            _todoService = todoService;
+            _todoQueryService = todoQueryService;
+            _todoCommandService = todoCommandService;
         }
 
         [HttpGet("getById")]
-        public IActionResult GetById([FromHeader] string id)
+        public async Task<IActionResult> GetById([FromHeader] string id)
         {
 
             if (id is null)
             {
                 return BadRequest();
             }
-            var todoResult = _todoService.GetById(Guid.Parse(id));
+            var todoResult = await _todoQueryService.GetById(Guid.Parse(id));
 
             var response = new TodoGetResponse(
-                todoResult.Todo.Id,
-                todoResult.Todo.Title,
-                todoResult.Todo.Description,
-                todoResult.Todo.Done);
+                todoResult.Id,
+                todoResult.Title,
+                todoResult.Description,
+                todoResult.Done);
 
             return Ok(response);
         }
 
 
         [HttpPost("add")]
-        public IActionResult Add(TodoPostRequest request)
+        public async Task<IActionResult> Add(TodoPostRequest request)
         {
-            var todoResult = _todoService.Add(
+            var todoResult = await _todoCommandService.Create(
+                new TodoItemCreateRequest(
                 request.Title,
                 request.Description,
-                request.Done);
+                request.Done
+                ));
 
             var response = new TodoPostResponse(todoResult.Id);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(string id) {
+            if (id is null) {
+                return BadRequest();
+            }
+            var todoResult = await _todoCommandService.Delete(new TodoItemDeleteRequest(Guid.Parse(id)));
+        
+            var response = new TodoDeleteRespone(todoResult.Done);
 
             return Ok(response);
         }
