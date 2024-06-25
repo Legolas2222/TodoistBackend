@@ -8,13 +8,13 @@ WORKDIR /app
 COPY ./*.csproj ./
 
 # Restore the NuGet packages
-RUN ./src/TodoistClone.Api/ dotnet restore
+#RUN ./src/TodoistClone.Api/ dotnet restore
 
 # Copy the rest of the source code to the container
 COPY . .
 
 # Build the application
-RUN dotnet build -c Release --no-restore
+RUN dotnet build -c Release 
 
 # Publish the application
 RUN dotnet publish -c Release --no-build -o /app/publish
