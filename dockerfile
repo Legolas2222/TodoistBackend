@@ -20,14 +20,17 @@ RUN dotnet build -c Release /app
 RUN dotnet publish -c Release --no-build -o /publish
 
 # Use the official .NET runtime image as the base image for the final image
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS final
+FROM mcr.microsoft.com/dotnet/runtime:8.0 AS final
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy the published output from the build image to the final image
-COPY --from=build  /publish /app
+COPY --from=build  /publish ./
 #RUN chmod +x ./app/publish/TodoistClone.Api
+
+# Expose the port number that the application listens on
+EXPOSE 8080
 
 # Set the entry point for the container
 ENTRYPOINT [ "dotnet", "./TodoistClone.Api.dll" ] 
