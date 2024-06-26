@@ -371,3 +371,5 @@ tests/TestDatabase/data
 
 # Local files for docker compose and local mongo db
 data/
+.devcontainer/devcontainer.json
+.github/dependabot.yml
