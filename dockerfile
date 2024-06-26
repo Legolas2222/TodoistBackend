@@ -27,6 +27,7 @@ WORKDIR /app
 
 # Copy the published output from the build image to the final image
 COPY --from=build /app/publish .
+#RUN chmod +x ./app/publish/TodoistClone.Api
 
 # Set the entry point for the container
-ENTRYPOINT ["todoistBackend", "TodoistBackend.dll"]
+ENTRYPOINT ["todoistClone", "/publish/TodoistClone.Api"]
