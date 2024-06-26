@@ -11,6 +11,10 @@ namespace TodoistClone.Infrastructure.Persistence.config
             var database = client.GetDatabase(DatabaseName);
 
             TodoItems = database.GetCollection<TodoItem>(CollectionName);
+            Console.WriteLine("Connected to MongoDB");
+            Console.WriteLine("Database: " + DatabaseName);
+            Console.WriteLine("Collection: " + CollectionName);
+            Console.WriteLine("Connection String: " + ConnectionString);
         }
            
         public IMongoCollection<TodoItem> TodoItems { get; }

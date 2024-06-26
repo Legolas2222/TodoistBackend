@@ -1,6 +1,8 @@
+using Microsoft.Extensions.DependencyInjection;
 using TodoistClone.Application;
 using TodoistClone.Infrastructure;
 using TodoistClone.Infrastructure.Persistence.config;
+using TodoistClone.Infrastructure.Persistence.Config;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,9 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllers(/*options => options.Filters.Add<ErrorHandlingFilterAttribute>()*/);
-builder.Services.AddScoped<ITodosContext>(sp => new TodosContext("mongodb://localhost:27017", "TodoistClone", "TodoItems"));
-
-
+//  Add custom Config for MongoDB
+//builder.Services.AddSingleton<MongoDBConfiguration>(new MongoDBConfiguration("mongodb://root:test1234@localhost:27017", "TodoistClone", "TodoItems"));
+builder.Services.AddSingleton<ITodosContext, TodosContext>(sp => new TodosContext("mongodb://root:test1234@localhost:27017/TodosDev", "TodoistClone", "TodoItems"));
+// builder.Services.Configure<MongoDBConfiguration>(builder.Configuration.GetSection("MongoDBConfiguration"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
