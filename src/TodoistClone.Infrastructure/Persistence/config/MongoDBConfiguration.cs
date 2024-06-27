@@ -1,16 +1,18 @@
-namespace TodoistClone.Infrastructure.Persistence.Config
-{
-    public class MongoDBDatabaseSettings
-    {
+using Microsoft.Extensions.Configuration;
+namespace TodoistClone.Infrastructure.Persistence.config
 
-        public MongoDBDatabaseSettings(string connectionString, string collectionName, string databaseName)
+{
+    
+    public class MongoDBDatabaseSettings {
+
+        public MongoDBDatabaseSettings(IConfiguration configuration)
         {
-            this.ConnectionString = connectionString;
-            this.CollectionName = collectionName;
-            this.DatabaseName = databaseName;
+            ConnectionString = configuration.GetSection("MongoDBConfiguration:ConnectionString").Value;
+            DatabaseName = configuration.GetSection("MongoDBConfiguration:DatabaseName").Value;
+            CollectionName = configuration.GetSection("MongoDBConfiguration:CollectionName").Value;
         }
-        public string ConnectionString { get; init; }
-        public string DatabaseName { get; init; } 
-        public string CollectionName { get; init; } 
+        public string ConnectionString { get; set; }
+        public string DatabaseName { get; set; } 
+        public string CollectionName { get; set; } 
     }
 }
