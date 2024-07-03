@@ -14,6 +14,12 @@ builder.Services.AddControllers(/*options => options.Filters.Add<ErrorHandlingFi
 //builder.Services.AddSingleton<MongoDBConfiguration>(new MongoDBConfiguration("mongodb://root:test1234@localhost:27017", "TodoistClone", "TodoItems"));
 //builder.Services.AddSingleton<ITodosContext, TodosContext>(sp => new TodosContext("mongodb://root:test1234@localhost:27017/?authSource=admin", "TodoistClone", "TodoItems"));
 builder.Services.Configure<MongoDBDatabaseSettings>(builder.Configuration.GetSection("MongoDBDatabaseSettings"));
+
+builder.Services.AddSingleton<ITodosContext, TodosContext>(sp => new TodosContext(
+    sp.GetRequiredService<MongoDBDatabaseSettings>().ConnectionString,
+    sp.GetRequiredService<MongoDBDatabaseSettings>().DatabaseName,
+    sp.GetRequiredService<MongoDBDatabaseSettings>().CollectionName
+    ));
 //builder.Services.Configure<MongoDBConfiguration>(builder.Configuration.GetSection("MongoDBConfiguration"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
