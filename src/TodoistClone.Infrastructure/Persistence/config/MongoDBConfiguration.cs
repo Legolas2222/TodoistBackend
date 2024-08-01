@@ -7,7 +7,7 @@ namespace TodoistClone.Infrastructure.Persistence.config
         {
             if (ConnectionString == null || DatabaseName == null || CollectionName == null)
             {
-                throw new Exception("Empty MongoDBConfiguration");
+               // throw new Exception("Empty MongoDBConfiguration");
                 
             }
             Console.WriteLine(ConnectionString);

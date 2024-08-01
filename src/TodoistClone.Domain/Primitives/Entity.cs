@@ -5,20 +5,22 @@ namespace TodoistClone.Domain.Primitives
     {
 
         [BsonRequired]
-        public Guid Id { get; protected set; }
+        [BsonId]
+        [BsonGuidRepresentation(MongoDB.Bson.GuidRepresentation.Standard)]
+        public Guid _Id { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
 
         protected Entity()
         {
-            Id = Guid.NewGuid();
+            _Id = Guid.NewGuid();
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
 
         protected Entity(Guid id)
         {
-            Id = id;
+            _Id = id;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
