@@ -12,7 +12,7 @@ builder.Services.AddInfrastructure();
 builder.Services.AddControllers(/*options => options.Filters.Add<ErrorHandlingFilterAttribute>()*/);
 //  Add custom Config for MongoDB
 builder.Services.Configure<MongoDbConfiguration>(builder.Configuration.GetSection("MongoDBConfiguration"));
-//builder.Services.AddSingleton<MongoDBConfiguration>(new MongoDBConfiguration("mongodb://root:test1234@localhost:27017", "TodoistClone", "TodoItems"));
+
 builder.Services.AddSingleton<ITodosContext, TodosContext>();
 //builder.Services.Configure<MongoDBConfiguration>(builder.Configuration.GetSection("MongoDBConfiguration"));
 
