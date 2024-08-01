@@ -11,9 +11,9 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllers(/*options => options.Filters.Add<ErrorHandlingFilterAttribute>()*/);
 //  Add custom Config for MongoDB
+builder.Services.Configure<MongoDbConfiguration>(builder.Configuration.GetSection("MongoDBConfiguration"));
 //builder.Services.AddSingleton<MongoDBConfiguration>(new MongoDBConfiguration("mongodb://root:test1234@localhost:27017", "TodoistClone", "TodoItems"));
-builder.Services.AddSingleton<ITodosContext, TodosContext>(sp => new TodosContext("mongodb://root:test1234@localhost:27017/?authSource=admin", "TodoistClone", "TodoItems"));
-builder.Services.AddOptions<MongoDBDatabaseSettings>();
+builder.Services.AddSingleton<ITodosContext, TodosContext>();
 //builder.Services.Configure<MongoDBConfiguration>(builder.Configuration.GetSection("MongoDBConfiguration"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -29,7 +29,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+Console.WriteLine("Starting App...");
 {
     app.UseHttpsRedirection();
     //app.UseMiddleware<ErrorHandlingMiddleware>();

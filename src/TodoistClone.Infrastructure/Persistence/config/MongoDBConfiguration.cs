@@ -1,18 +1,19 @@
 using Microsoft.Extensions.Configuration;
 namespace TodoistClone.Infrastructure.Persistence.config
-
 {
-    
-    public class MongoDBDatabaseSettings {
-
-        public MongoDBDatabaseSettings(IConfiguration configuration)
+    public class MongoDbConfiguration
+    {
+        public MongoDbConfiguration() 
         {
-            ConnectionString = configuration.GetSection("MongoDBConfiguration:ConnectionString").Value;
-            DatabaseName = configuration.GetSection("MongoDBConfiguration:DatabaseName").Value;
-            CollectionName = configuration.GetSection("MongoDBConfiguration:CollectionName").Value;
+            if (ConnectionString == null || DatabaseName == null || CollectionName == null)
+            {
+                throw new Exception("Empty MongoDBConfiguration");
+                
+            }
+            Console.WriteLine(ConnectionString);
         }
-        public string ConnectionString { get; set; }
-        public string DatabaseName { get; set; } 
-        public string CollectionName { get; set; } 
+        public string? ConnectionString { get; set; }
+        public string? DatabaseName { get; set; }
+        public string? CollectionName { get; set; }
     }
 }
