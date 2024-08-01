@@ -10,7 +10,7 @@ services:
       - 27017:27017
       - 28017:28017
     volumes:
-      - ./data:/data/db
+      - .././data:/data/db
   test:
     build:
       context: .
@@ -19,7 +19,7 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - .:/app
+      - .:../app
     ports:
       - 5252:5252
       - 8080:27017

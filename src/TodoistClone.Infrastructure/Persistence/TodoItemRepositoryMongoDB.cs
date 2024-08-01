@@ -44,7 +44,7 @@ namespace TodoistClone.Infrastructure.Persistence
         {
             var filter = Builders<TodoItem>.Filter.Eq(e => e._Id, id);
             var result = _context.TodoItems.FindAsync(filter);
-            return result.Result.FirstOrDefaultAsync();
+            return result.Result.FirstAsync();
 
         }
 
