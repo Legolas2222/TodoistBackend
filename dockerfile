@@ -14,10 +14,10 @@ COPY ./*.csproj ./
 COPY . .
 
 # Build the application
-RUN dotnet build -c Release /app
+RUN dotnet build -c Debug /app
 
 # Publish the application
-RUN dotnet publish -c Release --no-build -o ./publish
+RUN dotnet publish -c Debug --no-build -o ./publish
 
 # Use the official .NET runtime image as the base image for the final image
 #FROM mcr.microsoft.com/dotnet/runtime:8.0 AS final
