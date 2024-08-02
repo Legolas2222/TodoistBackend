@@ -8,7 +8,7 @@ public class TodoItemRepositoryInMemory : ITodoItemRepository
     private static List<TodoItem> todos = [];
     public Task<TodoItem?> GetByIdAsync(Guid id)
     {
-        var item = todos.Find(x => x.Id == id);
+        var item = todos.Find(x => x._Id == id);
         return Task.FromResult(item);
     }
     public Task<List<TodoItem>> GetAllAsync()
@@ -23,7 +23,7 @@ public class TodoItemRepositoryInMemory : ITodoItemRepository
 
     public void Update(TodoItem item)
     {
-        var oldItem = todos.Find(x => x.Id == item.Id);
+        var oldItem = todos.Find(x => x._Id == item._Id);
         if (oldItem is not null)
         {
             todos.Remove(oldItem);

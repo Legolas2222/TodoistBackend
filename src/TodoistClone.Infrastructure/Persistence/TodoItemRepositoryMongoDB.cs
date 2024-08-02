@@ -27,7 +27,7 @@ namespace TodoistClone.Infrastructure.Persistence
 
         public void Delete(TodoItem entity)
         {
-            var filter = Builders<TodoItem>.Filter.Eq(e => e.Id, entity.Id);
+            var filter = Builders<TodoItem>.Filter.Eq(e => e._Id, entity._Id);
             _context.TodoItems.DeleteOne(filter);
         }
 
@@ -42,16 +42,16 @@ namespace TodoistClone.Infrastructure.Persistence
 
         public Task<TodoItem?> GetByIdAsync(Guid id)
         {
-            var filter = Builders<TodoItem>.Filter.Eq(e => e.Id, id);
+            var filter = Builders<TodoItem>.Filter.Eq(e => e._Id, id);
             var result = _context.TodoItems.FindAsync(filter);
-            return result.Result.FirstOrDefaultAsync();
+            return result.Result.FirstAsync();
 
         }
 
         public void Update(TodoItem entity)
         {
 
-            var filter = Builders<TodoItem>.Filter.Eq(e => e.Id, entity.Id);
+            var filter = Builders<TodoItem>.Filter.Eq(e => e._Id, entity._Id);
 
             var result = _context.TodoItems.FindOneAndReplace(filter, entity);
         }

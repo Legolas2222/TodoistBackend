@@ -10,22 +10,19 @@ services:
       - 27017:27017
       - 28017:28017
     volumes:
-      - ./data:/data/db
-  
-  todoistbackend:
+      - .././data:/data/db
+  test:
     build:
       context: .
       dockerfile: dockerfile
-    container_name: todoistBackend
+    container_name: test
     depends_on:
       - mongodb
     volumes:
-      - .:/app
+      - .:../app
     ports:
       - 5252:5252
-      - 8080:8080
+      - 8080:27017
     environment:
       - MONGO_URI=mongodb://root:test1234@mongodb:27017/TodosDev
       - NODE_ENV=test
-
-  

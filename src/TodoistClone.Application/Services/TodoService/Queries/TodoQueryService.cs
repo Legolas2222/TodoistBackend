@@ -22,7 +22,7 @@ public class TodoQueryService : ITodoQueryService
         foreach (var item in result)
         {
             response.Add(new TodoItemDTO(
-                item.Id,
+                item._Id,
                 item.Title,
                 item.Description,
                 item.Done));
@@ -39,7 +39,7 @@ public class TodoQueryService : ITodoQueryService
         if (result is not null)
         {
             var respone = new TodoItemDTO(
-            result.Id,
+            result._Id,
             result.Title,
             result.Description,
             result.Done);
