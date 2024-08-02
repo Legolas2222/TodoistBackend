@@ -1,9 +1,7 @@
-using System.ComponentModel;
 using TodoistClone.Application.Common.Interfaces.Persistence;
 using TodoistClone.Application.Services.TodoService.Commands.DTOs.Create;
 using TodoistClone.Application.Services.TodoService.Commands.DTOs.Delete;
 using TodoistClone.Application.Services.TodoService.Commands.DTOs.Update;
-using TodoistClone.Application.Services.TodoService.Common.DTOs;
 using TodoistClone.Domain.Entities;
 
 namespace TodoistClone.Application.Services.TodoService.Commands;
@@ -12,39 +10,41 @@ public class TodoCommandService(ITodoItemRepository todoitemrepository) : ITodoC
 {
     private readonly ITodoItemRepository _todoitemrepository = todoitemrepository;
 
-    public async Task<TodoItemCreateResult> Add(TodoItemCreateRequest request)
+    public Task Add(TodoItemCreateRequest request)
     {
         //!Validation 
-        var todoItem = new TodoItem( 
+        var todoItem = new TodoItem(
             request.Title,
             request.Description,
             request.Done
         );
 
-        Guid id = await _todoitemrepository.Add(todoItem);
-
-        var respone = new TodoItemCreateResult(id);
-        return respone;
+        _todoitemrepository.Add(todoItem);
+        return Task.CompletedTask;
     }
 
-    public async Task<TodoItemDeleteResult> Delete(TodoItemDeleteRequest request)
+    public Task Delete(TodoItemDeleteRequest request)
     {
         //!Validation 
-        bool result = await _todoitemrepository.Delete(request.Id);
+        var item = _todoitemrepository.GetByIdAsync(request.Id);
+        if (item.Result is null)
+        {
+            throw new Exception("Provided ID did not match a db entry");
+        }
+        _todoitemrepository.Delete(item.Result);
+        return Task.CompletedTask;
 
-        var respone = new TodoItemDeleteResult(result);
-        return respone;
     }
 
-    public async Task<TodoItemUpdateResult> Update(TodoItemUpdateRequest data)
+    public Task Update(TodoItemUpdateRequest data)
     {
         //!Validation
-
-        Guid id = await _todoitemrepository.Update(data.Id, data.NewTitle, data.NewDescription);
-
-        var respone = new TodoItemUpdateResult(id);
-
-        return respone;
-
+        var item = _todoitemrepository.GetByIdAsync(data.Id);
+        if (item.Result is null)
+        {
+            throw new Exception("Provided ID did not match a db entry");
+        }
+        _todoitemrepository.Delete(item.Result);
+        return Task.CompletedTask;
     }
 }

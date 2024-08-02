@@ -12,7 +12,7 @@ namespace TodoistClone.Infrastructure.Authentication
     {
         private readonly IDateTimeProvider _dateTimeProvider = dateTimeProvider;
 
-        public string GenerateToken(User user) 
+        public string GenerateToken(User user)
         {
             var signingCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes("extremely-secret-key-that-no-one-knows")),

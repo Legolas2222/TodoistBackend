@@ -1,0 +1,16 @@
+FROM mongo:latest
+
+# Copy the database initialization script
+COPY init.js /docker-entrypoint-initdb.d/
+
+# Set the environment variables
+ENV MONGO_INITDB_DATABASE=TodosDev
+ENV MONGO_INITDB_ROOT_USERNAME=root
+ENV MONGO_INITDB_ROOT_PASSWORD=test1234
+
+# Expose the MongoDB port
+EXPOSE 27017
+EXPOSE 28017
+
+# Start MongoDB
+CMD ["mongod"]

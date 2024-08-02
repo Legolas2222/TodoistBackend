@@ -1,0 +1,8 @@
+.vs
+.vscode
+.data
+.obj
+.github
+.Requests
+./src/dockerfile
+./src/docker-compose.yml

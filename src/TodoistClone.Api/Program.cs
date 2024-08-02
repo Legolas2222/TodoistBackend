@@ -1,7 +1,8 @@
-using TodoistClone.Api.Filters;
-using TodoistClone.Api.Middleware;
+using Microsoft.Extensions.DependencyInjection;
 using TodoistClone.Application;
 using TodoistClone.Infrastructure;
+using TodoistClone.Infrastructure.Persistence.config;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,12 +10,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 builder.Services.AddControllers(/*options => options.Filters.Add<ErrorHandlingFilterAttribute>()*/);
+//  Add custom Config for MongoDB
+builder.Services.Configure<MongoDbConfiguration>(builder.Configuration.GetSection("MongoDBConfiguration"));
 
-/*
+builder.Services.AddSingleton<ITodosContext, TodosContext>();
+//builder.Services.Configure<MongoDBConfiguration>(builder.Configuration.GetSection("MongoDBConfiguration"));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -22,14 +28,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-*/
-var app = builder.Build();
+
+Console.WriteLine("Starting App...");
 {
-    //app.UseHttpsRedirection();
-    //app.UseMiddleware<ErrorHandlingMiddlware>();
-    app.UseExceptionHandler("/error");
     app.UseHttpsRedirection();
-    //app.UseAuthorization();
+    //app.UseMiddleware<ErrorHandlingMiddleware>();
+    // app.UseExceptionHandler("/error");
+    app.UseAuthorization();
+
 
     app.MapControllers();
 

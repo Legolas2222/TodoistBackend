@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: TodosDev
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: test1234
+    ports:
+      - 27017:27017
+      - 28017:28017
+    volumes:
+      - ./data:/data/db
+    networks:
+      - testNetwork

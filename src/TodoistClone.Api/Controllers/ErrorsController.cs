@@ -4,9 +4,16 @@ using TodoistClone.Application.Common.Errors;
 
 namespace TodoistClone.Api.Controllers;
 
+[Route("/error")]
 public class ErrorsController : ControllerBase
 {
-    [Route("/error")]
+    
+    public ErrorsController()
+    {
+        
+    }
+
+    [HttpGet]
     public IActionResult Error()
     {
         Exception? exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;

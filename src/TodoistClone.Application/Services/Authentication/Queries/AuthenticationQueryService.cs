@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TodoistClone.Application.Common.Errors;
+﻿using TodoistClone.Application.Common.Errors;
 using TodoistClone.Application.Common.Interfaces.Authentication;
 using TodoistClone.Application.Common.Interfaces.Persistence;
 using TodoistClone.Domain.Entities;
@@ -12,8 +7,8 @@ namespace TodoistClone.Application.Services.Authentication.Queries;
 
 public class AuthenticationQueryService : IAuthenticationQueryService
 {
-    private IJwtTokenGenerator _jwtTokenGenerator;
-    private IUserRepository _userRepository;
+    private readonly IJwtTokenGenerator _jwtTokenGenerator;
+    private readonly IUserRepository _userRepository;
 
     public AuthenticationQueryService(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
     {

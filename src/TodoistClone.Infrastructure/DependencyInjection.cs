@@ -5,6 +5,7 @@ using TodoistClone.Application.Common.Interfaces.Services;
 using TodoistClone.Infrastructure.Authentication;
 using TodoistClone.Infrastructure.Persistence;
 using TodoistClone.Infrastructure.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace TodoistClone.Infrastructure
 {
@@ -16,7 +17,8 @@ namespace TodoistClone.Infrastructure
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             services.AddScoped<IUserRepository, UserRepositoryInMemory>();
-            services.AddScoped<ITodoItemRepository, TodoItemRepositoryInMemory>();
+            services.AddScoped<ITodoItemRepository, TodoItemRepositoryMongoDB>();
+            
             return services;
         }
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TodoistClone.Application.Common.Errors;
+﻿using TodoistClone.Application.Common.Errors;
 using TodoistClone.Application.Common.Interfaces.Authentication;
 using TodoistClone.Application.Common.Interfaces.Persistence;
 using TodoistClone.Domain.Entities;

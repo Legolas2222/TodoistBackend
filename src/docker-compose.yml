@@ -1,0 +1,28 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: TodosDev
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: test1234
+    ports:
+      - 27017:27017
+      - 28017:28017
+    volumes:
+      - .././data:/data/db
+  test:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: test
+    depends_on:
+      - mongodb
+    volumes:
+      - .:../app
+    ports:
+      - 5252:5252
+      - 8080:27017
+    environment:
+      - MONGO_URI=mongodb://root:test1234@mongodb:27017/TodosDev
+      - NODE_ENV=test
